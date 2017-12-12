@@ -15,10 +15,10 @@ use Mix.Config
 # which you typically run after static files are built.
 config :phone_holdings, PhoneHoldingsWeb.Endpoint,
   load_from_system_env: true,
-  url: [host: "phone.holdings", port: {:system, "PORT"}],
+  url: [host: "phone.holdings", port: 80],
   check_origin: false,
   server: true,
-  root: ".",
+  secret_key_base: "${SECRET_KEY_BASE}",
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
@@ -26,8 +26,10 @@ config :logger, level: :info
 
 config :phone_holdings, PhoneHoldings.Repo,
   adapter: Ecto.Adapters.Postgres,
-  database: "phone_holdings_prod",
-  pool_size: 10
+  database: "",
+  url: "${DATABASE_URL}",
+  ssl: true,
+  pool_size: 1
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
