@@ -19,6 +19,11 @@ defmodule PhoneHoldingsWeb.Router do
     get "/", PageController, :index
   end
 
+  scope "/sip", PhoneHoldingsWeb do
+    post "/:user/dial", SipController, :dial_user
+    post "/outbound", SipController, :dial_outbound
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", PhoneHoldingsWeb do
   #   pipe_through :api
